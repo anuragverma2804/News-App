@@ -1,122 +1,102 @@
 package com.example.newsapp;
-import static android.content.ContentValues.TAG;
 
-import androidx.annotation.Nullable;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String url= "https://newsapi.org/v2/top-headlines?country=us&apiKey=025528994f094931b7da365f0eda3ac3";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getData();
+
+        findViewById(R.id.today_headline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent today_headline_intent = new Intent(getApplicationContext(), TodayHeadlines.class);
+                startActivity(today_headline_intent);
+            }
+        });
+        findViewById(R.id.bussiness).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bussiness_intent = new Intent(getApplicationContext(), Bussiness.class);
+                startActivity(bussiness_intent);
+            }
+        });
+        findViewById(R.id.entertainment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent entertainment_intent = new Intent(getApplicationContext(), Entertainment.class);
+                startActivity(entertainment_intent);
+            }
+        });
+        findViewById(R.id.health).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent health_intent = new Intent(getApplicationContext(), Health.class);
+                startActivity(health_intent);
+            }
+        });
+        findViewById(R.id.science).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent science_intent = new Intent(getApplicationContext(), Science.class);
+                startActivity(science_intent);
+            }
+        });
+        findViewById(R.id.technology).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent technology_intent = new Intent(getApplicationContext(), Technology.class);
+                startActivity(technology_intent);
+            }
+        });
+        findViewById(R.id.sports).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sports_intent = new Intent(getApplicationContext(), Sports.class);
+                startActivity(sports_intent);
+            }
+        });
+
+
+//        getData();
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void getData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                System.out.println("GOT");
-                try {
-                    System.out.println(response.getJSONArray("articles"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("ERROR");
-
-            }
-        }) {@Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("User-Agent", "Mozilla/5.0");
-                return headers;
-            }
-        };
-
-
-
-
-
-
-
-//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                System.out.println("GOT");
-//                Log.d("CONTENT",response.toString());
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                System.out.println("NOT GOT");
-//                Log.d(TAG, "ErroR :" + error.toString());
-//            }
-//        }){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<>();
-//                headers.put("User-Agent", "Mozilla/5.0");
-//                return headers;
-//            }
-//
-//        };
-        requestQueue.add(jsonObjectRequest);
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.subscribe:
+                Intent subscribe_intent = new Intent(getApplicationContext(), Subscribe.class);
+                startActivity(subscribe_intent);
+                return true;
+            case R.id.about_us:
+                Intent about_us_intent = new Intent(getApplicationContext(), About_us.class);
+                startActivity(about_us_intent);
+                return true;
+            case R.id.contact_us:
+                Intent contact_us_intent = new Intent(getApplicationContext(), Contact_us.class);
+                startActivity(contact_us_intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-
 
 }
