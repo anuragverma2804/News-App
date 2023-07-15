@@ -1,15 +1,15 @@
 package com.example.newsapp;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(sports_intent);
             }
         });
-
-
-//        getData();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

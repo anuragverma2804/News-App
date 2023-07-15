@@ -1,10 +1,12 @@
 package com.example.newsapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -14,20 +16,28 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Science extends AppCompatActivity {
-    private String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=025528994f094931b7da365f0eda3ac3";
+    ArrayList<ArticleModel> arrArticle = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecycleArticleAdapter adapter;
+    private final String url = "https://newsapi.org/v2/top-headlines?country=in&category=science&apiKey=43a3a6d4d9204f8886265212e5cc2f97";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_science);
+        recyclerView = findViewById(R.id.recycle_science);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new RecycleArticleAdapter(this, arrArticle);
         getData();
     }
 
@@ -44,7 +54,23 @@ public class Science extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 System.out.println("GOT");
                 try {
-                    System.out.println(response.getJSONArray("articles"));
+                    String status = response.getString("status");
+                    String totalResults = response.getString("totalResults");
+                    JSONArray articles = response.getJSONArray("articles");
+                    for (int i = 0; i < articles.length(); i++) {
+                        String source = articles.getJSONObject(i).getJSONObject("source").getString("name");
+                        String author = articles.getJSONObject(i).getString("author");
+                        String title = articles.getJSONObject(i).getString("title");
+                        String description = articles.getJSONObject(i).getString("description");
+                        String url = articles.getJSONObject(i).getString("url");
+                        String urlToImage = articles.getJSONObject(i).getString("urlToImage");
+                        String publishedAt = articles.getJSONObject(i).getString("publishedAt");
+                        TimeToText TimeToText = new TimeToText();
+                        publishedAt = TimeToText.covertTimeToText(publishedAt);
+
+                        arrArticle.add(new ArticleModel(source, author, title, description, url, urlToImage, publishedAt));
+                    }
+                    recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
