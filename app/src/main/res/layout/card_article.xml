@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/article_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:strokeColor="#070606"
+            app:strokeWidth="1dp">
+
+
+            <LinearLayout
+                android:id="@+id/llRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/article_source"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CNN"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/article_publishedAt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CNN"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" by "
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/article_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CNN"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/article_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="194dp"
+                    android:layout_margin="3dp"
+                    android:contentDescription=""
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+
+                    <TextView
+                        android:id="@+id/article_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="India's monsoon rains flood Yamuna river in Delhi, forcing thousands to evacuate and grinding life to a halt - CBS News"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+
+                    <TextView
+                        android:id="@+id/article_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="The Yamuna river runs through Delhi, home to some 30 million people, and record monsoon rains have just pushed its water level to a 45-year-high."
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/read_more_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="Read More..." />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </ScrollView>
+
+</LinearLayout>
